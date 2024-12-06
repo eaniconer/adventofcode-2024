@@ -35,6 +35,7 @@ public:
     }
 
     Direction direction() const noexcept { return dir_; }
+    void set_direction(Direction dir) { dir_ = dir; }
 
 private:
 

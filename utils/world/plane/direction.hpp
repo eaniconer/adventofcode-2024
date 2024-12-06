@@ -68,3 +68,13 @@ inline std::ostream& operator<<(std::ostream& out, Direction dir) {
 }
 
 }
+
+template<>
+struct std::hash<world::plane::Direction>
+{
+    std::size_t operator()(const world::plane::Direction& d) const noexcept
+    {
+        using T = std::underlying_type<world::plane::Direction>::type;
+        return std::hash<T>{}(static_cast<T>(d));
+    }
+};
