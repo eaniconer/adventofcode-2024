@@ -51,7 +51,6 @@ int main() {
             break;
         }
         ordering_rules.push_back(std::move(line));
-        line.clear(); // to avoid unspecified state
     }
 
     std::unordered_multimap<std::string_view, std::string_view> order_index;

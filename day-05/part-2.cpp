@@ -60,7 +60,6 @@ std::vector<std::string> readOrderingRules(std::ifstream& inf) {
             break;
         }
         rules.push_back(std::move(line));
-        line.clear(); // to avoid unspecified state
     }
     return rules;
 }
