@@ -4,12 +4,12 @@ This repository contains my C++ solutions to the Advent of Code 2024 challenges.
 
 ## Structure
 
-Each day's solution is in a separate directory (`day01`, `day02`, etc.) and contains:
+Each day's solution is in a separate directory (`day-01`, `day-02`, etc.) and contains:
 
 * `input.txt`: the input data for that day's challenge
 * `part-1.cpp`: the C++ solution code for part 1 of the challenge
 * `part-2.cpp`: the C++ solution code for part 2 of the challenge
-* `CMakeLists.txt`: CMake configuration file (starting from day06)
+* `CMakeLists.txt`: CMake configuration file (starting from day-06)
 
 ## Compiling and Running the Solutions
 
