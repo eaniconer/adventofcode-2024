@@ -11,4 +11,4 @@ add_subdirectory(utils)
 
 add_subdirectory(day-06)
 add_subdirectory(day-07)
-
+add_subdirectory(day-08)
