@@ -9,9 +9,9 @@
 namespace {
 using world::plane::OrientedObject;
 using world::plane::Direction;
-using world::plane::Vec2;
+using world::plane::Vec2i;
 
-OrientedObject findGuard(const std::vector<std::string>& field) {
+OrientedObject<> findGuard(const std::vector<std::string>& field) {
     for (size_t i = 0; i < field.size(); ++i) {
         for (size_t j = 0; j < field[i].size(); ++j) {
             if (field[i][j] == '^') {
@@ -39,7 +39,7 @@ int main() {
     const auto starting_position = guard.position();
     std::cout << guard << std::endl;
 
-    std::unordered_set<Vec2> visited;
+    std::unordered_set<Vec2i> visited;
     visited.emplace(guard.position());
     
     auto x_to_col = [&](int x) { return static_cast<size_t>(x); };
@@ -74,11 +74,11 @@ int main() {
     size_t cycle_count = 0;
 
     struct Vec2DirHash {
-        size_t operator()(const std::pair<Vec2, Direction>& p) const {
-            return std::hash<Vec2>{}(p.first) ^ std::hash<Direction>{}(p.second);
+        size_t operator()(const std::pair<Vec2i, Direction>& p) const {
+            return std::hash<Vec2i>{}(p.first) ^ std::hash<Direction>{}(p.second);
         }
     };  
-    std::unordered_set<std::pair<Vec2, Direction>, Vec2DirHash> visited2;
+    std::unordered_set<std::pair<Vec2i, Direction>, Vec2DirHash> visited2;
     for (auto p : visited) {
         if (p == starting_position) 
             continue;

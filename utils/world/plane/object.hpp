@@ -4,34 +4,35 @@
 
 #include <cstddef>
 
-namespace world {
-namespace plane {
+namespace world::plane {
 
+template <class T = int>
 class Object {
 public:
-    explicit Object(Vec2 position) noexcept : pos_(position) {}
-    Vec2 position() const noexcept { return pos_; }
+    explicit Object(Vec2<T> position) noexcept : pos_(position) {}
+    Vec2<T> position() const noexcept { return pos_; }
 
     void move(Direction direction, int steps = 1) noexcept {
-        pos_ += toVec2(direction) * steps;
+        pos_ += toVec2<T>(direction) * steps;
     }
-    void set_position(Vec2 position) noexcept { pos_ = position; }
+    void set_position(Vec2<T> position) noexcept { pos_ = position; }
 public:
-    Vec2 pos_;
+    Vec2<T> pos_;
 };
 
-class OrientedObject : public Object {
+template <class T = int>
+class OrientedObject : public Object<T> {
 public:
-    OrientedObject(Vec2 position, Direction direction) noexcept : Object(position), dir_(direction) {}
+    OrientedObject(Vec2<T> position, Direction direction) noexcept : Object<T>(position), dir_(direction) {}
 
     void do_steps(int steps = 1) noexcept {
-        Object::move(dir_, steps);
+        Object<T>::move(dir_, steps);
     }
 
     void rotate90CW() noexcept {
         // [0, 1; -1, 0] * [x, y]
-        auto v = toVec2(dir_);
-        dir_ = fromVec2({v.y, -v.x});
+        auto v = toVec2<T>(dir_);
+        dir_ = fromVec2<T>({v.y, -v.x});
     }
 
     Direction direction() const noexcept { return dir_; }
@@ -42,7 +43,9 @@ private:
     Direction dir_;
 };
 
-std::ostream& operator<<(std::ostream&, const OrientedObject&);
-
+template <class T>
+std::ostream& operator<<(std::ostream& out, const OrientedObject<T>& obj) {
+    return out << "OrientedObject{pos=" << obj.position() << ", dir=" << obj.direction() << "}";
 }
+
 }

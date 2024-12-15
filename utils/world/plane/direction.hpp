@@ -17,7 +17,8 @@ enum class Direction {
     No
 };
 
-inline Vec2 toVec2(Direction dir) {
+template <class T>
+inline Vec2<T> toVec2(Direction dir) {
     switch (dir)
     {
     case Direction::N: return {0, 1};
@@ -34,7 +35,8 @@ inline Vec2 toVec2(Direction dir) {
     }
 }
 
-inline Direction fromVec2(Vec2 dir) {
+template <class T>
+inline Direction fromVec2(Vec2<T> dir) {
     std::array<Direction, 3> dirs;
     if (dir.x < 0) {
         dirs = { Direction::SW, Direction::NW, Direction::W };

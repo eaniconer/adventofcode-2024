@@ -4,51 +4,63 @@
 
 namespace world::plane {
 
+template <class T = int>
 struct Vec2 {
-    int x = 0;
-    int y = 0;
+    T x = 0;
+    T y = 0;
 };
 
-inline Vec2 operator+(Vec2 lhs, Vec2 rhs) {
+using Vec2i = Vec2<int>;
+using Vec2ll = Vec2<long long>;
+
+template <class T>
+inline Vec2<T> operator+(Vec2<T> lhs, Vec2<T> rhs) {
     return {lhs.x + rhs.x, lhs.y + rhs.y};
 }
 
-inline Vec2 operator-(Vec2 lhs, Vec2 rhs) {
+template <class T>
+inline Vec2<T> operator-(Vec2<T> lhs, Vec2<T> rhs) {
     return {lhs.x - rhs.x, lhs.y - rhs.y};
 }
 
-inline Vec2 operator*(Vec2 lhs, int rhs) {
+template <class T>
+inline Vec2<T> operator*(Vec2<T> lhs, int rhs) {
     return {lhs.x * rhs, lhs.y * rhs};
 }
 
-inline Vec2 operator*(int lhs, Vec2 rhs) {
+template <class T>
+inline Vec2<T> operator*(int lhs, Vec2<T> rhs) {
     return {lhs * rhs.x, lhs * rhs.y};
 }
 
-inline Vec2& operator+=(Vec2& rhs, Vec2 lhs) {
+template <class T>
+inline Vec2<T>& operator+=(Vec2<T>& rhs, Vec2<T> lhs) {
     rhs.x += lhs.x;
     rhs.y += lhs.y;
     return rhs;
 }
 
-inline bool operator==(Vec2 lhs, Vec2 rhs) {
+template <class T>
+inline bool operator==(Vec2<T> lhs, Vec2<T> rhs) {
     return lhs.x == rhs.x && lhs.y == rhs.y;
 }
 
-inline bool operator!=(Vec2 lhs, Vec2 rhs) {
+template <class T>
+inline bool operator!=(Vec2<T> lhs, Vec2<T> rhs) {
     return !(lhs == rhs);
 }
 
-inline std::ostream& operator<<(std::ostream& out, Vec2 v) {
+template <class T>
+inline std::ostream& operator<<(std::ostream& out, Vec2<T> v) {
     return out << "Vec2{x=" << v.x << ", y=" << v.y << "}";
 }
 
 }
 
-template<>
-struct std::hash<world::plane::Vec2>
+template<class T>
+struct std::hash<world::plane::Vec2<T>>
 {
-    std::size_t operator()(const world::plane::Vec2& v) const noexcept
+    std::size_t operator()(const world::plane::Vec2<T>& v) const noexcept
     {
         return hash<int>{}(v.x) ^ hash<int>{}(v.y);
     }

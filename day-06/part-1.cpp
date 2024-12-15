@@ -8,15 +8,15 @@
 namespace {
 using world::plane::OrientedObject;
 using world::plane::Direction;
-using world::plane::Vec2;
+using world::plane::Vec2i;
 
-OrientedObject findGuard(const std::vector<std::string>& field) {
+OrientedObject<> findGuard(const std::vector<std::string>& field) {
     for (size_t i = 0; i < field.size(); ++i) {
         for (size_t j = 0; j < field[i].size(); ++j) {
             if (field[i][j] == '^') {
                 int y = static_cast<int>(field.size() - 1 - i);
                 int x = static_cast<int>(j);
-                return OrientedObject({x, y}, Direction::N);
+                return OrientedObject<>({x, y}, Direction::N);
             }
         } 
     }
@@ -33,7 +33,7 @@ int main() {
     OrientedObject guard = findGuard(field);
     std::cout << guard << std::endl;
 
-    std::unordered_set<Vec2> visited;
+    std::unordered_set<Vec2i> visited;
     visited.emplace(guard.position());
     
     auto x_to_col = [&](int x) { return static_cast<size_t>(x); };
