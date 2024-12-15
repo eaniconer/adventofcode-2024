@@ -11,13 +11,17 @@ class Object {
 public:
     explicit Object(Vec2<T> position) noexcept : pos_(position) {}
     Vec2<T> position() const noexcept { return pos_; }
+    T width() const noexcept { return size_.x; }
+    T height() const noexcept { return size_.y; }
 
     void move(Direction direction, int steps = 1) noexcept {
-        pos_ += toVec2<T>(direction) * steps;
+        pos_ = plane::shift(pos_, direction, steps);
     }
     void set_position(Vec2<T> position) noexcept { pos_ = position; }
+    void set_size(Vec2<T> sz) noexcept { size_ = sz; }
 public:
     Vec2<T> pos_;
+    Vec2<T> size_ = {1, 1};
 };
 
 template <class T = int>
@@ -42,6 +46,27 @@ private:
 
     Direction dir_;
 };
+
+template <class T>
+bool has_collision_on_move(OrientedObject<T> movable, const Object<T>& obj) {
+    movable.do_steps(1);
+
+    auto mp = movable.position();
+    auto op = obj.position();
+    for (T mi = 0; mi < movable.height(); ++mi) { // todo: implement more effective algorithm
+        for (T mj = 0; mj < movable.width(); ++mj) {
+            for (T oi = 0; oi < obj.height(); ++oi) {
+                for (T oj = 0; oj < obj.width(); ++oj) {
+                    if ((mp + Vec2<T>{mj, mi}) == (op + Vec2<T>{oj, oi})) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
+
+}
 
 template <class T>
 std::ostream& operator<<(std::ostream& out, const OrientedObject<T>& obj) {

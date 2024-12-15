@@ -50,6 +50,11 @@ inline Direction fromVec2(Vec2<T> dir) {
     return dirs[2];
 }
 
+template <class T>
+inline Vec2<T> shift(Vec2<T> v, Direction dir, T n_steps) {
+    return v + (toVec2<T>(dir) * n_steps);
+}
+
 inline std::ostream& operator<<(std::ostream& out, Direction dir) {
 #define PUT_DIRECTION_CASE(dir) case dir: return out << #dir
     switch (dir)
