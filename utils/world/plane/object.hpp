@@ -27,6 +27,9 @@ public:
 template <class T = int>
 class OrientedObject : public Object<T> {
 public:
+    using position_type = Vec2<T>;
+    using direction_type = Direction;
+
     OrientedObject(Vec2<T> position, Direction direction) noexcept : Object<T>(position), dir_(direction) {}
 
     void do_steps(int steps = 1) noexcept {
@@ -37,6 +40,12 @@ public:
         // [0, 1; -1, 0] * [x, y]
         auto v = toVec2<T>(dir_);
         dir_ = fromVec2<T>({v.y, -v.x});
+    }
+
+    void rotate90CCW() noexcept {
+        // [0, -1; 1, 0] * [x, y]
+        auto v = toVec2<T>(dir_);
+        dir_ = fromVec2<T>({-v.y, v.x});
     }
 
     Direction direction() const noexcept { return dir_; }
