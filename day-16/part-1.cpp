@@ -4,6 +4,7 @@
 #include <cassert>
 #include <unordered_set>
 #include <iostream>
+#include <limits>
 
 namespace {
 
@@ -21,10 +22,10 @@ int main() {
     static const Integer ROTATE_COST = 1000;
     static const Integer STEP_COST = 1;
 
-    Field field = utils::readLines("input.txt");    
+    Field field = utils::readLines("input.txt");
     const size_t h = field.size();
     const size_t w = field.at(0).size();
-    
+
     auto convertRCLtoVertexIndex = [h, w](size_t r, size_t c, size_t level) {
         size_t offset = (h * w) * level;
         return (r * w + c) + offset;
@@ -65,7 +66,7 @@ int main() {
                 end = std::make_pair(r, c);
             }
             assert(value == EMPTY);
-            
+
             auto u0 = convertRCLtoVertexIndex(r, c, 0);
             if (r > 0 && field[r - 1][c] == EMPTY) {
                 auto v0 = convertRCLtoVertexIndex(r - 1, c, 0);
@@ -108,7 +109,7 @@ int main() {
         size_t v = std::numeric_limits<size_t>::max();
         size_t best_d = std::numeric_limits<size_t>::max();
         for (const auto& [k, _] : graph) {
-            if (visited.find(k) != visited.end()) 
+            if (visited.find(k) != visited.end())
                 continue;
             if (d[k] < best_d) {
                 best_d = d[k];
@@ -129,7 +130,7 @@ int main() {
     }
 
     auto [er, rc] = end;
-    std::cout << " DIST: " 
+    std::cout << " DIST: "
         << std::min(d[convertRCLtoVertexIndex(er, rc, 0)], d[convertRCLtoVertexIndex(er, rc, 1)])
         << std::endl;
 
