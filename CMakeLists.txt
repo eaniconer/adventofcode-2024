@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(adventofcode2024)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -21,3 +21,5 @@ add_subdirectory(day-14)
 add_subdirectory(day-15)
 add_subdirectory(day-16)
 add_subdirectory(day-17)
+add_subdirectory(day-18)
+add_subdirectory(day-19)
