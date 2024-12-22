@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -g")
 
 add_subdirectory(utils)
 
@@ -25,3 +25,4 @@ add_subdirectory(day-18)
 add_subdirectory(day-19)
 add_subdirectory(day-20)
 add_subdirectory(day-21)
+add_subdirectory(day-22)
